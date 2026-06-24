@@ -24,19 +24,24 @@ def test_sending_mail_2(set_up: None) -> None:
     print("📧 Письмо #2 отправлено (fixture function)")
 
 
-def test_sending_mail_3(set_up_module: None) -> None:
+def test_sending_mail_3(set_up: None, set_up_module: None) -> None:
     """
     Тест отправки письма #3.
-    Использует фикстуру set_up_module (scope="module").
-    Фикстура выполняется ОДИН РАЗ для всего модуля.
+    Использует ОБЕ фикстуры: set_up (function) И set_up_module (module).
+
+    Порядок выполнения:
+    1. Сначала выполняются фикстуры с scope="function"
+    2. Затем фикстуры с scope="module" (если ещё не выполнялись)
     """
-    print("📧 Письмо #3 отправлено (fixture module)")
+    print("📧 Письмо #3 отправлено (fixture function + module)")
 
 
-def test_sending_mail_4(set_up_module: None) -> None:
+def test_sending_mail_4(set_up: None, set_up_module: None) -> None:
     """
     Тест отправки письма #4.
-    Использует фикстуру set_up_module (scope="module").
-    Фикстура НЕ выполняется повторно, т.к. уже выполнена для модуля.
+    Использует ОБЕ фикстуры: set_up (function) И set_up_module (module).
+
+    set_up_module НЕ выполняется повторно (уже выполнена для модуля),
+    но set_up выполняется снова (для каждого теста).
     """
-    print("📧 Письмо #4 отправлено (fixture module)")
+    print("📧 Письмо #4 отправлено (fixture function + module)")
